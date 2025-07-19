@@ -1,12 +1,12 @@
 # main.py
 
-import zipfile
 import os
+import zipfile
 
-# Extract model files from zip if models/ doesn't exist (e.g., in Streamlit Cloud)
 if not os.path.exists("models"):
-    with zipfile.ZipFile("models.zip", 'r') as zip_ref:
-        zip_ref.extractall(".")
+    os.makedirs("models")
+    with zipfile.ZipFile("models.zip", "r") as zip_ref:
+        zip_ref.extractall("models")
 
 
 import streamlit as st
