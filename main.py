@@ -1,12 +1,12 @@
 # main.py
 
-import os
-import zipfile
+import os, zipfile
 
-if not os.path.exists("models"):
-    os.makedirs("models")
+# Auto-extract models.zip on Streamlit Cloud if models/ is missing or empty
+if not os.path.exists("models/tfidf_transformer_file.pkl"):
     with zipfile.ZipFile("models.zip", "r") as zip_ref:
         zip_ref.extractall("models")
+
 
 
 import streamlit as st
