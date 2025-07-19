@@ -1,4 +1,14 @@
 # main.py
+
+import zipfile
+import os
+
+# Extract model files from zip if models/ doesn't exist (e.g., in Streamlit Cloud)
+if not os.path.exists("models"):
+    with zipfile.ZipFile("models.zip", 'r') as zip_ref:
+        zip_ref.extractall(".")
+
+
 import streamlit as st
 import pandas as pd
 import pickle
