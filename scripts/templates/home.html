@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="home.css" />
+    <title>Document</title>
+    <style>
+          *{
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        scroll-behavior: smooth;
+    }
+
+
+    ::-webkit-scrollbar {
+        width: 1px;
+    }
+
+    ::-webkit-scrollbar-track {
+        background: #646363;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background: #121212;
+        border-radius: 5px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        background: #242424;
+    }
+
+    a{
+        text-decoration: none;
+    }
+
+    body{
+        background-color: #EEEEEE;
+        width: 100vw;
+        height: 100vh;
+        display: grid;
+        grid-template-rows: 1fr 2fr;
+        /* flex-direction: column; */
+    }
+
+    body .navBar{
+        background-color: #000;
+        height: 15vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        gap: 150px;
+        font-family: "Anonymous Pro", monospace;
+    }
+
+    body .navBar .navItem a{
+        color: #fff;
+    }
+
+    body .helloWorldContainer{
+        /* align-self: center; */
+        justify-self: center;
+        width: 70%;
+        display: flex;
+        flex-direction: column;
+        /* gap: 20px; */
+        font-family: "Anonymous Pro", monospace;
+        font-size: 16px;
+    }
+
+    body .helloWorldContainer .containerTitle{
+        font-family: "Anonymous Pro", monospace;
+        font-size: 48px;
+    }
+
+    body .helloWorldContainer .containerText{
+        font-family: "Anonymous Pro", monospace;
+        font-size: 16px;
+        margin-top: 36px;
+        margin-bottom: 48px;
+    }
+
+    body .helloWorldContainer .containerText span{
+        font-weight: 600;
+    }
+
+    body .helloWorldContainer .containerButton{
+        width: fit-content;
+        height: fit-content;
+    }
+
+    body .helloWorldContainer .containerButton button{
+        background-color: #000;
+        color: #fff;
+        padding: 8px 35px;
+        font-size: 16px;
+        font-weight: 600;
+    }
+    </style>
+  </head>
+  <body>
+    <div class="navBar">
+      <div class="navItem"><a href="/topic_modeling">Topic Modeling</a></div>
+      <div class="navItem"><a href="/index2">Text Summarization and Sentiment Analysis</a></div>
+      <div class="navItem"><a href="/keyword_extraction">Keyword Extraction</a></div>
+    </div>
+
+    <div class="helloWorldContainer">
+      <div class="containerTitle">Text Summarization and Analysis System</div>
+      <div class="containerText">
+        Welcome to <span>NLP - toolkit!</span> Whether you're summarizing
+        lengthy articles, discovering hidden topics, extracting important
+        keywords, or analyzing sentiment, we've got you covered. Explore each
+        feature by navigating through the menu. Now you can view your recent
+        text analyses.
+        <br />
+        <br />
+        Ready to see your latest results? click the
+        <span>Generate Now</span>
+      </div>
+      <div class="containerButton">
+          <a href="/index2">
+            <button>Generate Now</button>
+          </a>
+      </div>
+
+    </div>
+  </body>
+</html>

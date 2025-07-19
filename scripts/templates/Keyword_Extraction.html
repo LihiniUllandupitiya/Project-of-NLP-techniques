@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Keyword Extraction</title>
+    <style>
+        /* Existing styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        ::-webkit-scrollbar {
+            width: 1px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #646363;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #121212;
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #242424;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        body {
+            background-color: #eeeeee;
+            width: 100vw;
+            height: 100vh;
+            display: grid;
+            grid-template-rows: 1fr 2fr;
+        }
+
+        body .navBar {
+            background-color: #000;
+            height: 15vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            gap: 150px;
+            font-family: "Anonymous Pro", monospace;
+        }
+
+        body .navBar .navItem a {
+            color: #fff;
+        }
+
+        body .mainContainer {
+            justify-self: center;
+            height: 85vh;
+            width: 70%;
+            padding-top: 50px;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        body .mainContainer .containerButton {
+            margin-bottom: 30px;
+        }
+
+        body .mainContainer .containerButton a {
+            background-color: #000;
+            color: #fff;
+            padding: 8px 35px;
+            font-size: 14px;
+            font-family: "Anonymous Pro", monospace;
+        }
+
+        body .mainContainer .containerTitle {
+            font-family: "Anonymous Pro", monospace;
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        body .mainContainer form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        body .mainContainer form label {
+            font-size: 16px;
+            font-family: "Anonymous Pro", monospace;
+            margin-bottom: 5px;
+        }
+
+        body .mainContainer form .fileInput {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 25px;
+            border: 2px solid black;
+            margin-bottom: 20px;
+        }
+
+        body .mainContainer form .fileInput input {
+            background-color: #eeeeee;
+            width: 97%;
+            border: none;
+        }
+
+        body .mainContainer form input:focus {
+            outline-width: 0;
+        }
+
+        body .mainContainer form .keywordsInput {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            margin-bottom: 30px;
+        }
+
+        body .mainContainer form .keywordsInput label {
+            font-size: 16px;
+            font-family: "Anonymous Pro", monospace;
+        }
+
+        body .mainContainer form .keywordsInput input,
+        body .mainContainer form .keywordsInput textarea {
+            background-color: #eeeeee;
+            border: 2px solid black;
+            padding: 8px 20px;
+        }
+
+        body .mainContainer form .buttonContainer {
+            height: fit-content;
+            display: flex;
+            justify-content: flex-end;
+            gap: 30px;
+        }
+
+        body .mainContainer form .buttonContainer button {
+            background-color: #000;
+            color: #fff;
+            padding: 8px 35px;
+            font-family: "Anonymous Pro", monospace;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <div class="navBar">
+        <div class="navItem"><a href="/topic_modeling">Topic Modeling</a></div>
+        <div class="navItem"><a href="/index2">Text Summarization and Sentiment Analysis</a></div>
+        <div class="navItem"><a href="/keyword_extraction">Keyword Extraction</a></div>
+    </div>
+
+    <div class="mainContainer">
+        <div class="containerButton"><a href="/">Back to home</a></div>
+        <div class="containerTitle">Keyword Extraction</div>
+
+        <form action="/extract_keywords" method="post" enctype="multipart/form-data">
+            <label for="fileInput">Upload File</label>
+            <div class="fileInput">
+                <input type="file" name="file" id="fileInput" />
+            </div>
+
+            <div class="keywordsInput">
+                <label for="textInput">Or Enter Text for Keyword Extraction</label>
+                <textarea name="text_input" class="form-control" id="textInput" rows="6" placeholder="Enter your text here..."></textarea>
+            </div>
+
+            <div class="keywordsInput">
+                <label for="num_keywords">Number of Keywords</label>
+                <input type="number" name="num_keywords" class="form-control" id="num_keywords" value="10" min="1" required>
+            </div>
+
+            <div class="buttonContainer">
+                <button type="submit">Extract Keywords</button>
+            </div>
+        </form>
+
+        <form action="/search_keywords" method="post">
+            <div class="keywordsInput">
+                <label for="searchKeywords">Search Keywords</label>
+                <input type="text" name="search" id="searchKeywords" required />
+            </div>
+
+            <div class="buttonContainer">
+                <button type="submit">Search Keywords</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        const fileInput = document.getElementById('fileInput');
+        const textInput = document.getElementById('textInput');
+
+        // Function to toggle the disabled state of inputs
+        function toggleInputStates() {
+            if (fileInput.files.length > 0) {
+                textInput.disabled = true; // Disable text input if file is selected
+            } else {
+                textInput.disabled = false; // Enable text input if no file is selected
+            }
+
+            if (textInput.value.trim()) {
+                fileInput.disabled = true; // Disable file input if text is entered
+            } else {
+                fileInput.disabled = false; // Enable file input if no text is entered
+            }
+        }
+
+        // Event listeners for file input and text input
+        fileInput.addEventListener('change', toggleInputStates);
+        textInput.addEventListener('input', toggleInputStates);
+
+        document.querySelector('form[action="/extract_keywords"]').addEventListener('submit', function (event) {
+            const fileValue = fileInput.value;
+            const textValue = textInput.value.trim();
+
+            // Validate that at least one input is provided
+            if (!fileValue && !textValue) {
+                alert('Please upload a file or enter text for keyword extraction.');
+                event.preventDefault(); // Prevent form submission
+            }
+        });
+    </script>
+</body>
+</html>
+

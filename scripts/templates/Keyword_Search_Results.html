@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Keyword Extraction Results</title>
+    <style>
+      /* Style updates from Keyword_Extraction.html */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        scroll-behavior: smooth;
+      }
+
+      ::-webkit-scrollbar {
+        width: 1px;
+      }
+
+      ::-webkit-scrollbar-track {
+        background: #646363;
+      }
+
+      ::-webkit-scrollbar-thumb {
+        background: #121212;
+        border-radius: 5px;
+      }
+
+      ::-webkit-scrollbar-thumb:hover {
+        background: #242424;
+      }
+
+      a {
+        text-decoration: none;
+      }
+
+      body {
+        background-color: #eeeeee;
+        width: 100vw;
+        height: 100vh;
+        display: grid;
+        grid-template-rows: 1fr 2fr;
+        font-family: "Anonymous Pro", monospace; /* Applying the first font globally */
+      }
+
+      body .navBar {
+        background-color: #000;
+        height: 15vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        gap: 150px;
+        font-family: "Anonymous Pro", monospace;
+      }
+
+      body .navBar .navItem a {
+        color: #fff;
+      }
+
+    .container {
+        justify-self: center;
+        height: 85vh;
+        width: 70%;
+        padding-top: 50px;
+        padding-bottom: 50px;
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+        background: #fff; /* Change background color to white */
+        color: black; /* Change text color to black for contrast */
+        padding: 3% 5%;
+        border-radius: 15px;
+        border: 2px solid black; /* Add a black border */
+        font-family: "Anonymous Pro", monospace; /* Apply the first font to the container */
+        margin-bottom: 20px; /* Add margin to create gap between footer and container */
+    }
+
+
+      .container h2 {
+        margin-bottom: 20px;
+      }
+
+      .keyword-list {
+        margin-top: 20px;
+      }
+
+      .keyword-item {
+        margin-bottom: 10px;
+        background-color: rgba(211, 211, 211, 0.7);
+        border-radius: 5px;
+      }
+
+      .keyword-item p {
+        padding: 8px 20px;
+        font-family: "Anonymous Pro", monospace; /* Ensure the first font is used */
+      }
+
+      /* Create a gap between the header and container */
+      .container {
+        margin-top: 50px; /* Add a margin between header and container */
+      }
+    </style>
+  </head>
+
+  <body>
+  <div class="navBar">
+      <div class="navItem"><a href="/topic_modeling">Topic Modeling</a></div>
+      <div class="navItem"><a href="/index2">Text Summarization and Sentiment Analysis</a></div>
+      <div class="navItem"><a href="/keyword_extraction">Keyword Extraction</a></div>
+  </div>
+
+    <div class="container">
+      <h2 class="text-center">Keyword Extraction Results</h2>
+      <div class="keyword-list">
+        {% for keyword in keywords %}
+        <div class="keyword-item">
+          <p class="text-dark">{{ keyword }}</p>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </body>
+</html>

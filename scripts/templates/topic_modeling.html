@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Topic Modeling</title>
+    <style>
+      /* Merged styles from keyword_Extraction.html */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        scroll-behavior: smooth;
+      }
+
+      ::-webkit-scrollbar {
+        width: 1px;
+      }
+
+      ::-webkit-scrollbar-track {
+        background: #646363;
+      }
+
+      ::-webkit-scrollbar-thumb {
+        background: #121212;
+        border-radius: 5px;
+      }
+
+      ::-webkit-scrollbar-thumb:hover {
+        background: #242424;
+      }
+
+      a {
+        text-decoration: none;
+      }
+
+      body {
+        background-color: #eeeeee;
+        width: 100vw;
+        height: 100vh;
+        display: grid;
+        grid-template-rows: 1fr 2fr;
+      }
+
+      body .navBar {
+        background-color: #000;
+        height: 15vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        gap: 150px;
+        font-family: "Anonymous Pro", monospace;
+      }
+
+      body .navBar .navItem a {
+        color: #fff;
+      }
+
+      body .mainContainer {
+        justify-self: center;
+        height: 85vh;
+        width: 70%;
+        padding-top: 50px;
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+      }
+
+      body .mainContainer .containerButton {
+        margin-bottom: 30px;
+      }
+
+      body .mainContainer .containerButton a {
+        background-color: #000;
+        color: #fff;
+        padding: 8px 35px;
+        font-size: 14px;
+        font-family: "Anonymous Pro", monospace;
+      }
+
+      body .mainContainer .containerTitle {
+        font-family: "Anonymous Pro", monospace;
+        font-size: 20px;
+        font-weight: 600;
+      }
+
+      body .mainContainer form {
+        display: flex;
+        flex-direction: column;
+      }
+
+      body .mainContainer form label {
+        font-size: 16px;
+        font-family: "Anonymous Pro", monospace;
+        margin-bottom: 5px;
+      }
+
+      body .mainContainer form .fileInput {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 25px;
+        border: 2px solid black;
+        margin-bottom: 20px;
+      }
+
+      body .mainContainer form .fileInput input {
+        background-color: #eeeeee;
+        width: 97%;
+        border: none;
+      }
+
+      body .mainContainer form input:focus {
+        outline-width: 0;
+      }
+
+      body .mainContainer form .keywordsInput {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        margin-bottom: 30px;
+      }
+
+      body .mainContainer form .keywordsInput label {
+        font-size: 16px;
+        font-family: "Anonymous Pro", monospace;
+      }
+
+      body .mainContainer form .keywordsInput input {
+        background-color: #eeeeee;
+        border: 2px solid black;
+        padding: 8px 20px;
+      }
+
+      body .mainContainer form .buttonContainer {
+        height: fit-content;
+        display: flex;
+        justify-content: flex-end;
+        gap: 30px;
+      }
+
+      body .mainContainer form .buttonContainer button {
+        background-color: #000;
+        color: #fff;
+        padding: 8px 35px;
+        font-family: "Anonymous Pro", monospace;
+        font-weight: 600;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navigation Bar -->
+   <div class="navBar">
+      <div class="navItem"><a href="/topic_modeling">Topic Modeling</a></div>
+      <div class="navItem"><a href="/index2">Text Summarization and Sentiment Analysis</a></div>
+      <div class="navItem"><a href="/keyword_extraction">Keyword Extraction</a></div>
+  </div>
+
+
+    <!-- Main Content -->
+    <div class="mainContainer">
+      <div class="containerButton"><a href="/">Back to home</a></div>
+      <div class="containerTitle">Topic Modeling</div>
+
+      <!-- Form for topic extraction -->
+      <form action="/extract_topics" method="post" enctype="multipart/form-data">
+        <label for="file_topics">Upload File for Topic Extraction</label>
+        <div class="fileInput">
+          <input type="file" name="file" class="form-control" id="file_topics" onchange="disableTextArea()" />
+        </div>
+
+        <div class="keywordsInput">
+          <label for="text_topics">Or Enter Text for Topic Extraction</label>
+          <textarea name="text_input" class="form-control" id="text_topics" rows="6" oninput="disableFileInput()"></textarea>
+        </div>
+
+        <div class="buttonContainer">
+          <button type="submit">Extract Topics</button>
+        </div>
+      </form>
+    </div>
+
+    <!-- JavaScript functions to toggle inputs -->
+    <script>
+      function disableFileInput() {
+        // Disable file input when typing in the text area
+        document.getElementById("file_topics").disabled = document.getElementById("text_topics").value.trim() !== '';
+      }
+
+      function disableTextArea() {
+        // Disable text area when selecting a file
+        document.getElementById("text_topics").disabled = document.getElementById("file_topics").files.length > 0;
+      }
+    </script>
+  </body>
+</html>

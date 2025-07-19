@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text Summarization and Analysis</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Anonymous Pro", monospace;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: #eeeeee;
+            width: 100vw;
+            height: 100vh;
+            display: grid;
+            grid-template-rows: 1fr 2fr;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        body .navBar {
+            background-color: #000;
+            height: 15vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            gap: 150px;
+            font-family: "Anonymous Pro", monospace;
+        }
+
+        body .navBar .navItem a {
+            color: #fff;
+        }
+
+        body .mainContainer {
+            justify-self: center;
+            height: 85vh;
+            width: 70%;
+            padding-top: 50px;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        body .mainContainer .containerButton {
+            margin-bottom: 30px;
+        }
+
+        body .mainContainer .containerButton a {
+            background-color: #000;
+            color: #fff;
+            padding: 8px 35px;
+            font-size: 14px;
+            font-family: "Anonymous Pro", monospace;
+        }
+
+        body .mainContainer .containerTitle {
+            font-family: "Anonymous Pro", monospace;
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        body .mainContainer form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        body .mainContainer form p {
+            margin-top: 10px; /* Adjusted gap */
+        }
+
+        body .mainContainer form .fileInput {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 25px;
+            border: 2px solid black;
+            margin-bottom: 20px;
+        }
+
+        body .mainContainer form .fileInput input {
+            background-color: #eeeeee;
+            width: 97%;
+            border: none;
+        }
+
+        body .mainContainer form input:focus {
+            outline-width: 0;
+        }
+
+        body .mainContainer form textarea {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #000; /* Reduced border thickness */
+            border-radius: 4px;
+            resize: vertical;
+            margin-bottom: 15px;
+        }
+
+        body .mainContainer form .buttonContainer {
+            height: fit-content;
+            display: flex;
+            justify-content: flex-end;
+            gap: 30px;
+        }
+
+        body .mainContainer form .buttonContainer button {
+            background-color: #000;
+            color: #fff;
+            padding: 8px 35px;
+            font-family: "Anonymous Pro", monospace;
+            font-weight: 600;
+        }
+
+        input[type="file"] {
+            display: block;
+            margin-bottom: 15px;
+            padding: 8px;
+            border: 2px solid #000;
+            border-radius: 4px;
+            width: 100%;
+            background-color: #f9f9f9;
+        }
+
+        input[type="submit"] {
+            background-color: #000;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #444;
+        }
+
+        /* Scrollbar styles */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation Bar -->
+    <div class="navBar">
+      <div class="navItem"><a href="/topic_modeling">Topic Modeling</a></div>
+      <div class="navItem"><a href="/index2">Text Summarization and Sentiment Analysis</a></div>
+      <div class="navItem"><a href="/keyword_extraction">Keyword Extraction</a></div>
+    </div>
+
+    <div class="mainContainer">
+        <div class="containerButton"><a href="/">Back to home</a></div>
+        <div class="containerTitle">Text Summarization and Analysis</div>
+        <form action="/summarize" method="POST" enctype="multipart/form-data">
+            <p>Upload File for text summarization and Sentiment Analysis</p>
+            <input type="file" name="file" accept=".pdf">
+            <p>Or Enter text for text summarization and Sentiment Analysis</p>
+            <textarea name="text" rows="6" placeholder="Paste your text here..."></textarea>
+            <input type="submit" value="Analyze">
+        </form>
+
+    </div>
+</body>
+</html>
